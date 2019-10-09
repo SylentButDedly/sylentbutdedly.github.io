@@ -5,10 +5,13 @@
     <script type="text/javascript" src="../../js/pandascore-api.js"></script>
 </head>
 <body>
-    <p>Version: b0.0.4</p>
+    <p>Version: b0.0.5</p>
     <pre id="main" style="word-wrap: break-word; white-space: pre-wrap;"></pre>
     <script type=text/javascript>
-        document.getElementById("main").innerHTML = getData("/ow/heroes");
+        //document.getElementById("main").textContent = getData("/ow/heroes");
+        console.log("Hello!");
+
+        getData("/ow/heroes");
     </script>
 </body>
 </html>

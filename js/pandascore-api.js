@@ -1,21 +1,29 @@
 function getData(reference) {
-    var url = "https://api.pandascore.co" + reference + "/?token=JRJdwSk8cheV3hM2yk_jbNEL3NxFv3RBQ0cazrOAs3ceMs67vvU";
-    var resp = "";
-    var xmlHttp = new XMLHttpRequest();
+    const url = "https://api.pandascore.co" + reference + "/?token=JRJdwSk8cheV3hM2yk_jbNEL3NxFv3RBQ0cazrOAs3ceMs67vvU";
 
-    if ("withCredentials" in xmlHttp) {
-        xmlHttp.open("GET", url, false);
-        xmlHttp.withCredentials = true;
-        xmlHttp.setRequestHeader("Content-Type", "application/json");
+    var request = new XMLHttpRequest();
+    request.open('GET', url, true);
 
-    } else {
-        xmlHttp = null;
-    }
+    request.onload = function() {
+        var data = JSON.parse(this.response);
 
-    if (xmlHttp != null) {
-        xmlHttp.send({ 'request': "authentication token"});
-        return xmlHttp.responseText;
-    } else {
-        return "Something went wrong!";
-    }
+        if (request.status < 200 || request.status > 400) {
+            console.log("Something went wrong! Error Code: " + request.status);
+            return "Something went wrong!";
+        }
+
+        let heroes = "";
+        data.forEach(item => {
+            heroes += "<h2>" + item.name + "</h2>" +
+                "<p>Real Name: " + item.real_name + "</p>" +
+                "<p>Role: " + item.role + "</p>" +
+                "<p>Difficulty: " + item.difficulty + "</p>";
+        });
+        document.getElementById("main").innerHTML = heroes;
+
+        return data;
+    };
+
+    request.send();
+
 }
