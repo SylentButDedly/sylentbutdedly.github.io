@@ -5,15 +5,15 @@ function getData(reference) {
 
     if ("withCredentials" in xmlHttp) {
         xmlHttp.open("GET", url, false);
-    } else if (typeof XDomainRequest != "undefined") {
-        xmlHttp = new XDomainRequest();
-        xmlHttp.open("GET", url);
+        xmlHttp.withCredentials = true;
+        xmlHttp.setRequestHeader("Content-Type", "application/json");
+
     } else {
         xmlHttp = null;
     }
 
     if (xmlHttp != null) {
-        xmlHttp.send();
+        xmlHttp.send({ 'request': "authentication token"});
         return xmlHttp.responseText;
     } else {
         return "Something went wrong!";
