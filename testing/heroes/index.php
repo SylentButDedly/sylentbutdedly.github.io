@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Heroes</title>
+    <title><?php echo $_REQUEST['hero']; ?></title>
     <script type="text/javascript" src="../../js/pandascore-api.js"></script>
 </head>
 <body>
