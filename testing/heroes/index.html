@@ -8,10 +8,19 @@
     <p>Version: b0.0.5</p>
     <pre id="main" style="word-wrap: break-word; white-space: pre-wrap;"></pre>
     <script type=text/javascript>
-        //document.getElementById("main").textContent = getData("/ow/heroes");
-        console.log("Hello!");
+        let json = getData("/ow/heroes")
 
-        getData("/ow/heroes");
+        let heroes = "";
+        json.forEach(item => {
+            heroes += "<h2>" + item.name + "</h2>" +
+                "<p>Real Name: " + item.real_name + "</p>" +
+                "<p>Role: " + item.role + "</p>" +
+                "<p>Difficulty: " + item.difficulty + "</p>";
+        });
+
+        document.getElementById("main").innerHTML = heroes;
+        console.log("Done with html");
+
     </script>
 </body>
 </html>
